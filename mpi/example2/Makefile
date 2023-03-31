@@ -4,7 +4,7 @@
 
 CC=mpiicc
 
-CFLAGS=-Wall
+CFLAGS=-Wall -O3
 
 EXE1=send_recv.exe
 EXE2=deadlock.exe

@@ -40,6 +40,7 @@ int main(int argc, char* argv[])
       toc = MPI_Wtime();
       printf("elapsed time %f (s):\tprocess %d, calling blocking MPI_Recv() (source rank %d)\n",
 	     (toc - tic), rank, source);
+      // cus recv is blocking, so even if its called, it will just wait and not return 
       MPI_Recv(message, BUFSIZ, MPI_CHAR, source, tag, MPI_COMM_WORLD, &status);
       toc = MPI_Wtime();
       printf("elapsed time %f (s):\tprocess %d, MPI_Recv() returned with message: %s\n",

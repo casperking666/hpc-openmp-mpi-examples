@@ -1,0 +1,16 @@
+Running on host compute242.bc4.acrc.priv
+Time is Thu Mar 30 22:57:11 BST 2023
+Directory is /user/home/yf20630/lab1/hpc-openmp-mpi-examples/mpi/example5
+Slurm job ID is 11322118
+
+This job runs on the following machines:
+compute[242-245]
+
+rank 1: Message from Nash (process 2), time: 0.000057
+rank 2: Message from Young (process 3), time: 0.000165
+rank 0: Message from Stills (process 1), time: 0.000091
+rank 0: Message from Young (process 3), time: 0.000137
+rank 1: Message from Crosby (process 0), time: 0.000175
+rank 3: Message from Crosby (process 0), time: 0.000020
+rank 2: Message from Stills (process 1), time: 0.000208
+rank 3: Message from Nash (process 2), time: 0.000067

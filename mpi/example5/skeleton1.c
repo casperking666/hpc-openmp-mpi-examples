@@ -14,6 +14,8 @@
 #include <stdlib.h>
 #include "mpi.h" 
 
+// honestly, dont like this very much. not race condition but they are not in order
+// one thread may have done send receive and doing next send before the other has just received
 int main(int argc, char* argv[])
 {
   int myrank;            /* the rank of this process */

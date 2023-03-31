@@ -135,16 +135,16 @@ int main(int argc, char* argv[])
   for(ii=0; ii < local_nrows; ii++) {
     if(rank == MASTER) {
       for(jj=0; jj < local_ncols + 2; jj++) {
-	printf("%2.1f ",w[ii * (local_ncols + 2) + jj]);
+	      printf("%2.1f ",w[ii * (local_ncols + 2) + jj]);
       }
       printf(" ");
       for(kk=1; kk < size; kk++) { /* loop over other ranks */
-	remote_ncols = calc_ncols_from_rank(kk, size);
-	MPI_Recv(printbuf, remote_ncols + 2, MPI_DOUBLE, kk, tag, MPI_COMM_WORLD, &status);
-	for(jj=0; jj < remote_ncols + 2; jj++) {
-	  printf("%2.1f ",printbuf[jj]);
-	}
-	printf(" ");
+	      remote_ncols = calc_ncols_from_rank(kk, size);
+	      MPI_Recv(printbuf, remote_ncols + 2, MPI_DOUBLE, kk, tag, MPI_COMM_WORLD, &status);
+	      for(jj=0; jj < remote_ncols + 2; jj++) {
+	        printf("%2.1f ",printbuf[jj]);
+	      }
+	      printf(" ");
       }
       printf("\n");
     }
@@ -165,14 +165,15 @@ int main(int argc, char* argv[])
   ** - unpack values from the recieve buffer into the grid
   */
 
+  // basically sending the first column
   /* send to the left, receive from right */
   for(ii=0; ii < local_nrows; ii++)
-    sendbuf[ii] = w[ii * (local_ncols + 2) + 1];
+    sendbuf[ii] = w[ii * (local_ncols + 2) + 1]; // say 6 column, can just count it
   MPI_Sendrecv(sendbuf, local_nrows, MPI_DOUBLE, left, tag,
 	       recvbuf, local_nrows, MPI_DOUBLE, right, tag,
 	       MPI_COMM_WORLD, &status);
   for(ii=0; ii < local_nrows; ii++)
-    w[ii * (local_ncols + 2) + local_ncols + 1] = recvbuf[ii];
+    w[ii * (local_ncols + 2) + local_ncols + 1] = recvbuf[ii]; // note this should be the last column
   
   /* send to the right, receive from left */
   for(ii=0; ii < local_nrows; ii++)

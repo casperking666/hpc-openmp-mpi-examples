@@ -51,7 +51,7 @@ int main( int argc,char* argv[] )
   if (sendfirst == 1) {
     printf("process %d of %d. Sending..\n",rank,size);
     /* first send.. */
-    MPI_Send(message, BUFSIZ, MPI_CHAR, other, tag, MPI_COMM_WORLD);
+    MPI_Send(message, BUFSIZ, MPI_CHAR, other, tag, MPI_COMM_WORLD); // cus it's blocking, so both send won't return
     /* ..then receive */ 
     MPI_Recv(message, BUFSIZ, MPI_CHAR, other, tag ,MPI_COMM_WORLD, &status);
     /* 

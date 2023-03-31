@@ -70,12 +70,15 @@ int main(int argc, char* argv[])
   ** i) send to the left and receive from the right
   ** ii) then send to the right and recieve from the left
   */
+  double tic = MPI_Wtime();
   MPI_Sendrecv(sendbuf, strlen(sendbuf)+1, MPI_CHAR, left, tag,
 	      recvbuf, BUFSIZ, MPI_CHAR, right, tag, MPI_COMM_WORLD, &status);
-  printf("rank %d: %s\n", myrank, recvbuf);
+  double toc = MPI_Wtime();
+  printf("rank %d: %s, time: %f\n", myrank, recvbuf, toc-tic);
   MPI_Sendrecv(sendbuf, strlen(sendbuf)+1, MPI_CHAR, right, tag,
 	      recvbuf, BUFSIZ, MPI_CHAR, left, tag, MPI_COMM_WORLD, &status);
-  printf("rank %d: %s\n", myrank, recvbuf);
+  double tac = MPI_Wtime();
+  printf("rank %d: %s, time: %f\n", myrank, recvbuf, tac-tic);
 
   /* don't forget to tidy up when we're done */
   MPI_Finalize();

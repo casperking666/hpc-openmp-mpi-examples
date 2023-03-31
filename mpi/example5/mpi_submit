@@ -1,13 +1,12 @@
 #!/bin/bash
 
-#SBATCH --nodes 1
-#SBATCH --ntasks-per-node 4
-#SBATCH --partition veryshort
-#SBATCH --reservation COSC024002
-#SBATCH --account COSC024002
+#SBATCH --nodes 4
+#SBATCH --ntasks-per-node 1
+#SBATCH --partition=teach_cpu
+#SBATCH --account=COSC028844
 #SBATCH --job-name MPI
 #SBATCH --time 00:15:00
-#SBATCH --output OUT
+#SBATCH --output OUT3
 #SBATCH --exclusive
 
 # This time, asking for 1 node with 4 tasks per node
@@ -32,5 +31,5 @@ export I_MPI_PMI_LIBRARY=/usr/lib64/libpmi.so
 
 # Run the parallel MPI executable
 # Just run the first binary: change this line to try out the others
-srun ./skeleton1.exe
+mpirun -np 4 ./skeleton2-simple2d.exe
 

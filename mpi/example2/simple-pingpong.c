@@ -62,7 +62,7 @@ int processor_A( void )
   sfloat = sizeof(float);
 
   printf("length   time/message (usec)    transfer rate (Gbyte/sec)\n");
-
+  printf("%f, %f\n", buffer[0], buffer[1]);
   /* Process A sets the message size */
   for (length=1; length<=10001; length+=1000) { 
     /* Get the start time for the pingpong message passing */
@@ -71,7 +71,7 @@ int processor_A( void )
     /* Process A sends and then receives the message back 1000 times */
     for (ii=0; ii<1000; ii++){
       MPI_Ssend(buffer, length, MPI_FLOAT, proc_B, ping,
-		MPI_COMM_WORLD);
+		MPI_COMM_WORLD); // transferred buffer of size length, dunno in what form, an float array maybe?
       MPI_Recv(buffer, length, MPI_FLOAT, proc_B, pong,
 	       MPI_COMM_WORLD, &status);
     }
@@ -94,7 +94,7 @@ int processor_B( void )
   MPI_Status status;
   extern float buffer[10001];
   int length;
-
+  printf("%f, %f\n", buffer[0], buffer[1]);
   /* Process B sets the message size */
   for (length=1; length<=10001; length+=1000) { 
     /* Process B receives and then sends the message back 1000 times */
